@@ -39,13 +39,6 @@ public class UserController {
 
     @PostMapping ("/login")
     public String userLogin(@RequestBody User user){
-        Authentication authentication = authenticationManager
-                .authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
-        if(authentication.isAuthenticated() ){
-            return jwtService.generateToken(user.getUsername());
-        }
-        else {
-            return "Login Failed";
-        }
+        return userService.login(user);
     }
 }
